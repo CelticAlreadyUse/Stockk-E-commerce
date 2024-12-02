@@ -1,16 +1,15 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
-import { NavigationMenu } from "@radix-ui/react-navigation-menu"
-import NavBar from "@/components/Navbar"
-
-export default function Layout({ children }: { children: React.ReactNode }) {
+import { Outlet } from "react-router-dom"
+import { Toaster } from "@/components/ui/toaster"
+export default function Layout() {
   return (
     <SidebarProvider>
       <AppSidebar />
       <main>
         <SidebarTrigger />
-        <NavBar/>
-        {children}
+        <Outlet/>
+        <Toaster/>
       </main>
     </SidebarProvider>
   )

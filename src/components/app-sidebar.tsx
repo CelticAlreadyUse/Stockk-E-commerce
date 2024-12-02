@@ -1,14 +1,14 @@
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
+  Users,
   Frame,
   LifeBuoy,
   Map,
   PieChart,
   Send,
   Settings2,
-  SquareTerminal,
+  ShoppingBag,
+  ShoppingCart
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -22,6 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+
 } from "@/components/ui/sidebar"
 
 const data = {
@@ -32,29 +33,21 @@ const data = {
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Shop",
+      url: "/",
+      icon: ShoppingBag,
       isActive: true,
       items: [
         {
           title: "History",
           url: "#",
         },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
       ],
     },
     {
-      title: "Models",
+      title: "Seller",
       url: "#",
-      icon: Bot,
+      icon: Users,
       items: [
         {
           title: "Genesis",
@@ -71,26 +64,15 @@ const data = {
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      title: "Cart",
+      url: "/cart/1",
+      icon: ShoppingCart,
+    
       items: [
         {
-          title: "Introduction",
+          title: "Card List",
           url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
+        }
       ],
     },
     {
@@ -157,7 +139,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
                 <div className="flex items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <h1 className="font-semibold px-4 py-1">Logo</h1>
+                <h1 className="font-semibold bg-black text-white px-4 py-1">Logo</h1>
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Dropship-App</span>
