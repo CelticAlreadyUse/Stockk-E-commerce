@@ -1,9 +1,11 @@
 
 import  CardItem  from "@/components/card/Card"
+import Loading from "@/components/effects/loading";
 import { Filter } from "@/components/filterButton/Filter";
 import { FadeText } from "@/components/ui/fade-text"
 import SearchBar from "@/components/ui/searchbar/SearchBar";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function Main() {
 // const ItemData =[
@@ -42,6 +44,7 @@ const getItems = async() =>{
       throw new Error("Network response was not ok")
     }
     const result =await response.json()
+    setLoading(true)
     setData(result)
   }catch(err){
     setError("oops theres something wrong")
@@ -55,24 +58,30 @@ useEffect(()=>{
   getItems()
 },[])
   return (
-    <>
+    <div>
          <SearchBar />
+       {loading == true &&
+       <div className="fixed  z-10 left-0 top-0 bg-black/15 w-full h-full">
+      <Loading/>
+      </div>
+      }
       <div className="flex items-center justify-between">
       <FadeText text="Stock List" direction="up" className="text-2xl mt-2 font-bold ml-10"></FadeText>
       <Filter/>
       </div>
-        <section className="mx-4 flex mt-4 flex-wrap w-full justify-center gap-12">
+        <section className="mx-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-4 gap-12">
         {data != null ?
-        
           data.products.map((item:any)=>(
+            <Link to={`/detail/${item.id}`}>
             <CardItem  key={item.id} itemImage={item.images.map((img:string)=>img)} category={item.tags.map((item:any)=>(item))}
             itemDescription={item.decsription}
             itemTitle={item.title}/>
+            </Link>
           ))
         
         :<h1>There's no data</h1>}
           
         </section>
-        </>
+        </div>
   )
 }

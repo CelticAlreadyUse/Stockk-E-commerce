@@ -21,17 +21,10 @@ const CardItem: React.FC<props> = React.memo(({ itemTitle, category, itemDescrip
     <BlurFade>
       <Card className="w-[250px] rounded-xl max-sm:w-[200px] cursor-pointer">
         <div className="border-b-2">
-
           <LazyImage 
               className="max-sm:h-36 rounded-t-xl object-center w-full h-full"
               src={itemImage}
               alt={itemTitle}  />
-          {/* <img
-            fetchPriority="high"
-            className="max-sm:h-36 rounded-t-xl object-center w-full h-full"
-            src={itemImage}
-            alt={itemTitle} // Tambahkan atribut alt untuk SEO dan aksesibilitas
-          /> */}
         </div>
         <CardHeader>
           <CardTitle className="max-sm:text-lg">{itemTitle}</CardTitle>

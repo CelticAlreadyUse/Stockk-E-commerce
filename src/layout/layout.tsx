@@ -7,7 +7,7 @@ export default function Layout() {
     <SidebarProvider>
       <AppSidebar />
       <main>
-        <SidebarTrigger />
+        <SidebarTrigger size={"lg"}/>
         <Outlet/>
         <Toaster/>
       </main>
