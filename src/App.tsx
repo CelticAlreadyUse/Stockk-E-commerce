@@ -4,6 +4,7 @@ import { Main } from './pages/Main'
 import ProductDetail from './pages/Detail/ProductDetail'
 import Layout from './layout/layout'
 import Cart from './pages/Cart'
+import Warehouse from './pages/Warehouse'
 function App() {
   return (
     <Router>
@@ -11,6 +12,7 @@ function App() {
         <Route element={<Layout/>}>
         <Route path='/detail/:id' element={<ProductDetail/>}></Route>
         <Route path='/cart/:id' element={<Cart/>}></Route>
+        <Route path='/warehouse' element={<Warehouse/>}></Route>
       <Route  path="/" element={<Main/>}>
       </Route>
         </Route>
