@@ -8,9 +8,12 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel"
 import { useRef } from "react"
-import ChildImage from "./ChildImage"
-
-export function ImageCArousel() {
+type ImageCArouselProps = {
+  Image?:{
+    image_url:string
+  }[] 
+}
+export function ImageCArousel(props:ImageCArouselProps) {
    const plugin = useRef(Autoplay({delay:2400,stopOnMouseEnter:false,}))
     return (
     <Carousel
@@ -20,19 +23,19 @@ export function ImageCArousel() {
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {props.Image?.map((img, index) => (
           <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className=" h-[18rem] flex  items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+            <div>
+              <Card >
+                <CardContent className=" h-[18rem] ">
+                  <img  className="object-cover w-full h-full" width={1200} height={1200} src={img.image_url}>
+                  </img>
                 </CardContent>
               </Card>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-        <ChildImage/>
     </Carousel>
   )
 }

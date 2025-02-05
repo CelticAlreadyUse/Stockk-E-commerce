@@ -7,7 +7,9 @@ export default function Layout() {
     <SidebarProvider>
       <AppSidebar />
       <main>
-        <SidebarTrigger size={"lg"}/>
+        <div className="fixed md:block z-20 mt-2 ">
+        <SidebarTrigger variant={"ghost"} className="bg-black rounded-full w-fit text-white" />
+        </div>
         <Outlet/>
         <Toaster/>
       </main>

@@ -16,7 +16,7 @@ export function Filter() {
   return (
     <Sheet>
       <SheetTrigger className="border-none" asChild>
-        <Button variant="outline"><FaFilter className="mr-28 cursor-pointer" /></Button>
+        <Button variant="outline"><FaFilter className="md:mr-28 cursor-pointer" /></Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

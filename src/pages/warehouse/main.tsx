@@ -1,6 +1,6 @@
 const Main = () => {
   return (
-    <div>main</div>
+    <div>Werehouse detail here</div>
   )
 }
 

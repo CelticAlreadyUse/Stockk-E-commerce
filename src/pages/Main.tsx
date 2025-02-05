@@ -4,46 +4,23 @@ import Loading from "@/components/effects/loading";
 import { Filter } from "@/components/filterButton/Filter";
 import { FadeText } from "@/components/ui/fade-text"
 import SearchBar from "@/components/ui/searchbar/SearchBar";
+import { useSidebar } from "@/components/ui/sidebar";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function Main() {
-// const ItemData =[
-//   {
-//     itemImageUrl :"https://dummyjson.com/image/400x200?type=webp&text=I+am+a+webp+image",
-//     category:["techonology"],
-//     ItemDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis deleniti voluptatibus repudiandae temporibus ipsum quod reiciendis qui, maxime accusamus eligendi natus assumenda quas quisquam quos, itaque eveniet fuga unde. Veniam debitis commodi assumenda praesentium quibusdam aut cum, reiciendis distinctio quos explicabo nulla eius voluptas iusto harum, unde odio? Enim, magnam nam dolorem nesciunt doloremque soluta a at architecto consequuntur.",
-//     ItemTitle:"Remote"
-//   },
-//   {
-//     itemImageUrl :"https://dummyjson.com/image/400x200?type=webp&text=I+am+a+webp+image",
-//     category:["techonology"],
-//     ItemDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis deleniti voluptatibus repudiandae temporibus ipsum quod reiciendis qui, maxime accusamus eligendi natus assumenda quas quisquam quos, itaque eveniet fuga unde. Veniam debitis commodi assumenda praesentium quibusdam aut cum, reiciendis distinctio quos explicabo nulla eius voluptas iusto harum, unde odio? Enim, magnam nam dolorem nesciunt doloremque soluta a at architecto consequuntur.",
-//     ItemTitle:"Remote"
-//   },
-//   {
-//     itemImageUrl :"https://dummyjson.com/image/400x200?type=webp&text=I+am+a+webp+image",
-//     category:["techonology"],
-//     ItemDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis deleniti voluptatibus repudiandae temporibus ipsum quod reiciendis qui, maxime accusamus eligendi natus assumenda quas quisquam quos, itaque eveniet fuga unde. Veniam debitis commodi assumenda praesentium quibusdam aut cum, reiciendis distinctio quos explicabo nulla eius voluptas iusto harum, unde odio? Enim, magnam nam dolorem nesciunt doloremque soluta a at architecto consequuntur.",
-//     ItemTitle:"Remote"
-//   },
-//   {
-//     itemImageUrl :"https://dummyjson.com/image/400x200?type=webp&text=I+am+a+webp+image",
-//     category:["techonology"],
-//     ItemDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis deleniti voluptatibus repudiandae temporibus ipsum quod reiciendis qui, maxime accusamus eligendi natus assumenda quas quisquam quos, itaque eveniet fuga unde. Veniam debitis commodi assumenda praesentium quibusdam aut cum, reiciendis distinctio quos explicabo nulla eius voluptas iusto harum, unde odio? Enim, magnam nam dolorem nesciunt doloremque soluta a at architecto consequuntur.",
-//     ItemTitle:"Remote"
-//   }
-// ]
 const [data,setData] = useState<any>(null)
 const [loading,setLoading] = useState<boolean>(true)
 const [err,setError] = useState<string>("")
 const getItems = async() =>{
   try{
-    const response = await fetch('https://dummyjson.com/products?limit=10')
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/warehouse/products`)
     if (!response.ok){
+      console.log(err)
       throw new Error("Network response was not ok")
     }
     const result =await response.json()
+    console.log(result)
     setLoading(true)
     setData(result)
   }catch(err){
@@ -53,35 +30,44 @@ const getItems = async() =>{
     setLoading(false)
   }
 }
-
+var sidebar = useSidebar().state
 useEffect(()=>{
   getItems()
 },[])
+
   return (
-    <div>
-         <SearchBar />
+    <div className={`grid md:${ sidebar == "expanded" ? 'w-[calc(100svw-16rem)]' : 'w-svw' }    place-items-end`}>
        {loading == true &&
        <div className="fixed  z-10 left-0 top-0 bg-black/15 w-full h-full">
       <Loading/>
       </div>
       }
-      <div className="flex items-center justify-between">
-      <FadeText text="Stock List" direction="up" className="text-2xl mt-2 font-bold ml-10"></FadeText>
-      <Filter/>
-      </div>
-        <section className="mx-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mt-4 gap-12">
+      <div className="flex items-center justify-end w-full mb-4 border-b-2">
+        <SearchBar />
+        <FadeText text="Stock List" direction="up" className="hidden md:text-2xl mt-2 font-bold md:ml-10"></FadeText>
+        <Filter/>
+        </div>
         {data != null ?
-          data.products.map((item:any)=>(
-            <Link to={`/detail/${item.id}`}>
-            <CardItem  key={item.id} itemImage={item.images.map((img:string)=>img)} category={item.tags.map((item:any)=>(item))}
+        <>
+        <section className="flex mt-2 flex-wrap gap-5 justify-center w-ful items-center bg-purple-700-2">
+          {
+            data.data.map((item:any)=>(
+              <Link key={item.id} to={`/detail/${item.id}`}>
+            <CardItem  key={item.id} itemImage={item.picture_url_list.length > 0 ? item.picture_url_list[0].image_url : null}
             itemDescription={item.decsription}
-            itemTitle={item.title}/>
+            itemTitle={item.name}itemWarehouse={item.warehouse_id} itemPrice={item.price}/>
             </Link>
           ))
-        
-        :<h1>There's no data</h1>}
-          
+        }
         </section>
+            </>
+        
+        :
+        <div className="flex items-center absolute left-1/2 top-1/2">
+          <img className="w-48 object-cover h-36" width={1000} height={1000} src="/public/images/error_not_found.png"></img>
+          <h1 className="text-2xl font-bold">There's no data</h1>
+          </div>
+        }
         </div>
   )
 }

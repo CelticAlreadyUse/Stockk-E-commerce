@@ -2,28 +2,23 @@ import * as React from "react"
 import {
   Users,
   Frame,
-  LifeBuoy,
   Map,
   PieChart,
-  Send,
   Settings2,
   ShoppingBag,
   ShoppingCart
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-
 } from "@/components/ui/sidebar"
+import { Link } from "react-router-dom"
 
 const data = {
   user: {
@@ -33,7 +28,7 @@ const data = {
   },
   navMain: [
     {
-      title: "Shop",
+      title: "product",
       url: "/",
       icon: ShoppingBag,
       isActive: true,
@@ -46,7 +41,7 @@ const data = {
     },
     {
       title: "Seller",
-      url: "#",
+      url: "/warehouses",
       icon: Users,
       items: [
         {
@@ -99,18 +94,6 @@ const data = {
       ],
     },
   ],
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
-  ],
   projects: [
     {
       name: "Design Engineering",
@@ -132,30 +115,26 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar  variant="sidebar" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <h1 className="font-semibold bg-black text-white px-4 py-1">Logo</h1>
+              <Link to="/">
+                <div className="flex items-center justify-center rounded-lg  text-sidebar-primary-foreground">
+                <img className="rounded-full" width={50} height={50} src="/images/WhatsApp Image 2025-02-05 at 09.20.09.jpeg" alt="logo" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Dropship-App</span>
+                  <span className="truncate md:text-black text-white font-semibold">Gondal-Group</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="text-white bg-black/40 md:text-black md:bg-white">
         <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
     </Sidebar>
   )
 }
