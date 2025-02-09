@@ -21,39 +21,26 @@ import {
 import { Link } from "react-router-dom"
 
 const data = {
-  user: {
-    name: "user",
-    email: "useremail@gmail.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "product",
       url: "/",
       icon: ShoppingBag,
       isActive: true,
-      items: [
+      items:[
         {
-          title: "History",
-          url: "#",
-        },
-      ],
+          title: "List",
+          url:"/",
+        }
+      ]
     },
     {
       title: "Seller",
-      url: "/warehouses",
+      url: "/warehouse",
       icon: Users,
       items: [
         {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
+          title: "warehouses",
           url: "#",
         },
       ],
@@ -131,9 +118,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-      </SidebarHeader>
+      </SidebarHeader >
       <SidebarContent className="text-white bg-black/40 md:text-black md:bg-white">
-        <NavMain items={data.navMain} />
+        <NavMain  items={data.navMain} />
       </SidebarContent>
     </Sidebar>
   )

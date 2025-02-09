@@ -30,7 +30,7 @@ export function Select(item:Props) {
                 <SelectGroup>
                     <SelectLabel >{item.Label}</SelectLabel>
                     {itemData.map((item)=>(
-                        <SelectItem  value={item}>{item}</SelectItem>
+                        <SelectItem key={item} value={item}>{item}</SelectItem>
                     ))
                     }
                 </SelectGroup>

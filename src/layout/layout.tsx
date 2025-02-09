@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster"
 export default function Layout() {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar variant="sidebar"/>
       <main>
         <div className="fixed md:block z-20 mt-2 ">
         <SidebarTrigger variant={"ghost"} className="bg-black rounded-full w-fit text-white" />

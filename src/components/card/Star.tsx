@@ -1,14 +1,13 @@
 import React from 'react';
 
 interface StarProps {
-  rating: number;
+  rating: number ;
 }
 
 const Star: React.FC<StarProps> = ({ rating }) => {
-  // Menghitung jumlah bintang penuh, setengah, dan kosong
-  const fullStars = Math.floor(rating); // Bintang penuh
-  const halfStars = rating % 1 >= 0.5 ? 1 : 0; // Bintang setengah (jika ada)
-  const emptyStars = 5 - fullStars - halfStars; // Bintang kosong
+  const fullStars = Math.floor(rating ); 
+  const halfStars = rating % 1 >= 0.5 ? 1 : 0; 
+  const emptyStars = 5 - fullStars - halfStars; 
 
   return (
     <>
